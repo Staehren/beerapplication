@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app="beerApp">
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<title>Beer App</title>
+</head>
+<body ng-controller="BeerController">
+
+  <div class="popup-overlay" ng-show="popupOverlay"></div>
+
+  <div ng-show="showNewBeer" class="popup popup-new-beer">
+    <form>
+    <div class="container">
+      <div class="input">
+        <label>Title:</label>
+        <input type="text" ng-model="newBeer.title">
+      </div>
+      <div class="input hide">
+        <label>Url:</label>
+        <input type="text" ng-model="newBeer.url">
+      </div>
+      <div  class="input">
+        <label>Type:</label>
+        <input type="text" ng-model="newBeer.type">
+      </div>
+      <div  class="input">
+        <label>ABV:</label>
+        <input type="text" ng-model="newBeer.abv">
+      </div>
+      <div  class="input">
+        <label>Brewery:</label>
+        <input type="text" ng-model="newBeer.brewery">
+      </div>
+      <div  class="input">
+        <label>Description:</label>
+        <textarea ng-model="newBeer.description"></textarea>
+      </div>
+      <input type="file" id="exampleInputFile" file-model="newBeer.file">
+      <button class="btn btn-blue btn-popup" ng-click="submitbeer()">Create new beer</button>
+      <!-- <button class="btn btn-blue btn-popup" ng-click="addBeer()">Create new beer</button> -->
+      <button class="btn btn-blue btn-popup" ng-click="showNewBeer = false; popupOverlay = false">Close</button>
+      <br>
+      {{ newBeer }}
+    </div>
+    </form>
+  </div>
+
+  <div ng-show="showEditBeer" class="popup popup-edit-beer">
+    <div class="container">
+      <div class="input">
+        <label>Title:</label>
+        <input type="text" ng-model="editBeer.title">
+      </div>
+      <div class="hide input">
+        <label>Url:</label>
+        <input type="text" ng-model="editBeer.url">
+      </div>
+      <div class="input">
+        <label>Type:</label>
+        <input type="text" ng-model="editBeer.type">
+      </div>
+      <div class="input">
+        <label>ABV:</label>
+        <input type="text" ng-model="editBeer.abv">
+      </div>
+      <div class="input">
+        <label>Brewery:</label>
+        <input type="text" ng-model="editBeer.brewery">
+      </div>
+      <div  class="input">
+        <label>Description:</label>
+        <textarea ng-model="editBeer.description"></textarea>
+      </div>
+      <!--<button class="btn btn-blue btn-popup" ng-click="updateBeer(editBeer._id)">Update</button>-->
+      <button class="btn btn-blue btn-popup" ng-click="updatebeerimg(editBeer._id)">Update</button>
+      <button class="btn btn-red btn-popup" ng-click="deleteBeer(editBeer._id)">Delete</button>
+      <button class="btn btn-blue btn-popup" ng-click="showEditBeer = false; popupOverlay = false">Close</button>
+    </div>
+  </div>
+
+  <div ng-show="showShowBeer" class="popup popup-show-beer">
+    <div class="container">
+      <img ng-src="{{'images/uploads/'+(showBeer.image || 'default.jpg' )}}">
+        <h3>{{ showBeer.title }}</h3>
+        <p>Type: {{ showBeer.type }}</p>
+        <p>ABV: {{ showBeer.abv }}%</p>
+        <p>Brewery: {{ showBeer.brewery }}</p>
+        <p>Description: <br>{{ showBeer.description }}</p>
+      <button class="btn btn-blue btn-popup" ng-click="showShowBeer = false; popupOverlay = false">Close</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <img class="logo" src="images/logo.png" alt="Beer collection">
+    </header>
+
+    <button class="btn btn-green btn-create" ng-click="showShowBeer = false; showEditBeer = false; showNewBeer = true; popupOverlay = true;">Create new beer<span class="plus-icon"><img src="images/plus.png" alt="plus icon"></span></button>
+
+    <div class="search">
+      <input class="searchbox" type="text" ng-model="searchBox" placeholder="Search...">
+    </div>
+
+    <div class="beerlist">
+      <div class="beer" ng-repeat="beer in beerlist | filter:searchBox">
+        <div class="beer-holder">
+          <img class="beer-image" ng-click="showbeer(beer._id)" ng-src="{{'images/uploads/'+(beer.image || 'default.jpg' )}}">
+          <div class="beer-content" ng-click="showbeer(beer._id)">
+            <h3 class="beer-title">{{ beer.title }}</h3>
+            <p class="beer-type">Type: {{ beer.type }}</p>
+            <p class="beer-abv">ABV: {{ beer.abv }}%</p>
+            <p class="beer-brewery">Brewery: {{ beer.brewery }}</p>
+            <p class="beer-description hide">Description: {{ beer.description }}</p>
+          </div>
+          <button class="btn btn-red btn-beer" ng-click="deleteBeer(beer._id)">Delete</button>
+          <button class="btn btn-blue btn-beer" ng-click="editbeer(beer._id)">Edit</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <p>Disclaimer: This is a school project.</p>
+  </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.5/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/BeerController.js"></script>
+    <script src="js/services/multipartForm.js"></script>
+    <script src="js/directives/fileModel.js"></script>
+</body>
+</html>
