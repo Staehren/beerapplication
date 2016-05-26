@@ -1,0 +1,38 @@
+{
+  "name": "beerapplication",
+  "description": "Beer application containing lots of beer.",
+  "version": "3.9.3",
+  "contributors": [
+    "Patrick Bomann Tofteng",
+    "Martin Ungermann Stæhr"
+  ],
+  "license": "MIT",
+  "repository": "nodeprojects/beerapplication",
+  "keywords": [
+    "form",
+    "post",
+    "multipart",
+    "form-data",
+    "formdata",
+    "express",
+    "beer"
+  ],
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongojs": "^2.4.0",
+    "multer": "^1.1.0",
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "files": [
+    "app/",
+    "server.js",
+    "node_modules/",
+    "public/"
+  ],
+  "scripts": {
+    "test": "standard && mocha"
+  }
+}
