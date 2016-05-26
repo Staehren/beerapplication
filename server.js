@@ -4,6 +4,10 @@ var mongojs = require('mongojs');
 var db = mongojs('beerApp', ['beerlist']);
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/meals-development');
+app.use(express.static(__dirname + '/build'));
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
