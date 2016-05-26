@@ -21,7 +21,7 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "mongojs": "^2.4.0",
-    "multer": "^1.1.0",
+    "multer": "^1.1.0"
   },
   "engines": {
     "node": ">= 0.10.0"
